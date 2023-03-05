@@ -15,3 +15,6 @@ Nodemon is used in development mode
 ## To run the server in development mode
 
 ### `npm run dev`
+
+## Link to online application
+https://twilight-breeze-8208.fly.dev/
