@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 let persons = [
     { 
       "id": 1,
@@ -26,11 +28,16 @@ let persons = [
 ];
 
 app.get('/', (request, response) =>{
-    response.send('<h1>This is the root!</h1>')
+    response.send('<h1>This is the root!</h1>');
+});
+
+app.get('/info', (request, response) => {
+    const date = new Date();
+    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`);
 });
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+    response.json(persons);
 });
 
 app.get('/api/persons/:id', (request, response) => {
@@ -43,16 +50,20 @@ app.get('/api/persons/:id', (request, response) => {
   }
 });
 
+app.post('/api/persons', (request, response) => {
+  const person = request.body;
+  person.id = Math.floor(Math.random()*1000000);
+  persons = persons.concat(person);
+  response.json(person);
+});
+
 app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
+  const id = Number(request.params.id);
+  persons = persons.filter(person => person.id !== id);
   response.status(204).end()
 });
 
-app.get('/info', (request, response) => {
-    const date = new Date()
-    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`)
-});
+
 
 const PORT = 3001;
 app.listen(PORT);
