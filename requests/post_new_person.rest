@@ -5,3 +5,27 @@ Content-Type: application/json
     "name": "Kalle",
     "number": "09-86149854"
 }
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "number": "09-86149854"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Kalle"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+
+}
