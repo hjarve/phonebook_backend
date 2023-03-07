@@ -1,7 +1,7 @@
 # Phonebook Backend
 
 This repo contains the exercises of Full Stack open course's part 3
-This a server for a phonebook application 
+This a server for a phonebook application with frontend build (frontend can be found from here: https://github.com/hjarve/fullstackopen/tree/main/part2/phonebook)
 
 # About the project
 
