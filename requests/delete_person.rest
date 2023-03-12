@@ -1,4 +1,4 @@
-DELETE http://localhost:3001/api/persons/2
+DELETE http://localhost:3001/api/persons/640c2f7bf28f1cbc142d7881
 
 ###
 DELETE https://twilight-breeze-8208.fly.dev/api/persons/433241
