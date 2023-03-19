@@ -46,7 +46,7 @@ app.get('/api/persons', (request, response) => {
 });
 
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body;
   if (!body.name){
     return response.status(400).json({
@@ -57,22 +57,33 @@ app.post('/api/persons', (request, response) => {
       error: 'Content missing'
     })
   }
-  /*const person_exists = persons.find(element => element.name === person.name)
-  if (person_exists){
-    return response.status(400).json({
-      error: 'name must be unique'
-    })
-  }
-  */
+
   const person = new Person({
     name: body.name,
     number: body.number
   });
-
+  
   person.save().then(savedPerson => {
     response.json(savedPerson);
-  });
-});
+  })
+  .catch(error => next(error));
+})
+
+
+app.put('/api/persons/:id', (request, response, next) => {
+  const body = request.body;
+
+  const person = {
+    name: body.name,
+    number: body.number
+  }
+
+  Person.findOneAndUpdate({name: person.name}, {number: person.number}, {new: true})
+    .then(updatedPerson => {
+      response.json(updatedPerson);
+    })
+    .catch(error => next(error));
+})
 
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -93,7 +104,6 @@ app.delete('/api/persons/:id', (request, response) => {
       response.status(204).end();
     })
     .catch(error =>{
-      console.log(error);
       response.status(500).end();
     })
 });
