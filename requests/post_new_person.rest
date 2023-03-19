@@ -40,6 +40,15 @@ Content-Type: application/json
 
 }
 
+###
+PUT http://localhost:3001/api/persons/3
+Content-Type: application/json
+
+{
+    "name": "g",
+    "number": "09-86149854"
+}
+
 
 ###
 POST https://twilight-breeze-8208.fly.dev/api/persons
