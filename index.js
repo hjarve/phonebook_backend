@@ -28,14 +28,11 @@ const unknownEndpont = (request, response) => {
 }
 
 
-app.get('/', (request, response) =>{
-    response.send('<h1>This is the root!</h1>');
-});
-
-
 app.get('/info', (request, response) => {
     const date = new Date();
-    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`);
+    Person.find({}).then(persons => {
+      response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`)
+    })
 });
 
 
