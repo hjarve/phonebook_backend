@@ -18,6 +18,8 @@ const errorHandler = (error, request, response, next) => {
   console.log(error.message);
   if (error.name === 'CastError') {
     return response.status(400).send({error: 'malformatted id'});
+  } else if (error.name === 'ValidationError'){
+    return response.status(400).json({error: error.message});
   }
 
   next(error);
@@ -45,11 +47,7 @@ app.get('/api/persons', (request, response) => {
 
 app.post('/api/persons', (request, response, next) => {
   const body = request.body;
-  if (!body.name){
-    return response.status(400).json({
-      error: 'content missing'
-    })
-  } else if (!body.number){
+  if (!body.number){
     return response.status(400).json({
       error: 'Content missing'
     })
